@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <TextView
         android:id="@+id/am_title_text"
@@ -28,6 +28,17 @@
         app:layout_constraintTop_toBottomOf="@id/am_title_text"
         tools:text = "00:00"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/am_edit_btn"
+        style="@style/ButtonDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit"
+        android:drawableStart="@drawable/ic_edit"
+        android:layout_marginTop="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/am_timer_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
