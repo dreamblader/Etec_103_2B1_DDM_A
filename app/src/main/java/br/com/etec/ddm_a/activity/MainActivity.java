@@ -4,13 +4,16 @@ package br.com.etec.ddm_a.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Bundle;
-
 import br.com.etec.ddm_a.R;
 import br.com.etec.ddm_a.fragment.SleepHourFragment;
+import br.com.etec.ddm_a.model.CustomTime;
+import br.com.etec.ddm_a.view.TimeTextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SleepHourFragment.TimeListener {
+
+    CustomTime initTime = null;
+    CustomTime finalTime = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +28,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onTimeResult(CustomTime time, boolean isFirst) {
+        TimeTextView timeText = findViewById(R.id.ma_sleep_totaltext);
+    }
 }

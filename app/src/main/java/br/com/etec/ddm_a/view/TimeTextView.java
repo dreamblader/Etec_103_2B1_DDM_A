@@ -1,41 +1,43 @@
 package br.com.etec.ddm_a.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import br.com.etec.ddm_a.R;
 
-public class TimeTextView extends ViewGroup {
+public class TimeTextView extends FrameLayout {
 
 
-    public TimeTextView(Context context) {
-        super(context);
-        initView();
-    }
-
-    public TimeTextView(Context context, AttributeSet attrs) {
+    public TimeTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initView();
+        inflate(context, R.layout.timetext_component,this);
+
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TimeTextView);
+        setTitle(array.getString(R.styleable.TimeTextView_title));
+        setTime(array.getString(R.styleable.TimeTextView_time));
+        array.recycle();
     }
 
-    public TimeTextView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initView();
+    public void setTitle(String value){
+        if(value!=null){
+            TextView titleText = findViewById(R.id.am_title_text);
+            titleText.setText(value);
+        }
     }
 
-    public TimeTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        initView();
+    public void setTime(String value){
+        if(value!=null) {
+            TextView timeText = findViewById(R.id.am_timer_text);
+            timeText.setText(value);
+        }
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
-    }
-
-    private void initView(){
-        inflate(getContext(), R.layout.timetext_component,this);
-    }
 }

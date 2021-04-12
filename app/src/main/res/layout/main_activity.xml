@@ -15,10 +15,11 @@
         app:layout_constraintBottom_toTopOf="@id/ma_sleep_totaltext"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <br.com.etec.ddm_a.view.TimeTextView
         android:id="@+id/ma_sleep_totaltext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:title="@string/sleep_hours"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

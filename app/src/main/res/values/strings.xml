@@ -2,5 +2,7 @@
     <string name="app_name">DDM-A</string>
     <string name="home_title">Falta para você dormir:</string>
     <string name="home_second_title">Falta para você acordar:</string>
+    <string name="sleep_hours">Horas de sono:</string>
     <string name="edit">Editar</string>
+    <string name="default_time_value">00:00</string>
 </resources>
