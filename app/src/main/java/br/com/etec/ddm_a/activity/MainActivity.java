@@ -30,6 +30,20 @@ public class MainActivity extends AppCompatActivity implements SleepHourFragment
 
     @Override
     public void onTimeResult(CustomTime time, boolean isFirst) {
-        TimeTextView timeText = findViewById(R.id.ma_sleep_totaltext);
+        if(isFirst){
+            initTime = time;
+        } else {
+            finalTime = time;
+        }
+        checkTotalResult();
     }
+
+    private void checkTotalResult(){
+        if(initTime != null && finalTime != null){
+            TimeTextView timeText = findViewById(R.id.ma_sleep_totaltext);
+            CustomTime totalTime = finalTime.setFromDiff(initTime);
+            timeText.setTime(totalTime.toString());
+        }
+    }
+
 }

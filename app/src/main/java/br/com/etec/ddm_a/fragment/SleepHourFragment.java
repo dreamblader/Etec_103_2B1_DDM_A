@@ -71,8 +71,7 @@ public class SleepHourFragment extends Fragment {
 
     private void setupTimer()
     {
-        String timeString = paddingTime(displayTime.getHour())+":"+paddingTime(displayTime.getMinutes());
-        timeText.setTime(timeString);
+        timeText.setTime(displayTime.toString());
     }
 
     private void setupListeners()
@@ -82,18 +81,6 @@ public class SleepHourFragment extends Fragment {
             TimePickerDialog timeDialog = new TimePickerDialog(getContext(),timeListener,sleepTime.getHour(),sleepTime.getMinutes(),true);
             timeDialog.show();
         });
-    }
-
-    private String paddingTime(int time){
-        String timeString = "";
-
-        if(time < 10){
-            timeString = "0"+time;
-        } else {
-            timeString = String.valueOf(time);
-        }
-
-        return timeString;
     }
 
     TimePickerDialog.OnTimeSetListener timeListener = (view, hour, minute) -> {

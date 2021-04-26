@@ -57,20 +57,45 @@ public class CustomTime {
             Calendar current = Calendar.getInstance();
             int currentHour = current.get(Calendar.HOUR_OF_DAY);
             int currentMinute = current.get(Calendar.MINUTE);
-            int diffMinute = minutes - currentMinute;
-            int diffHour = 0;
+            CustomTime calendarTime = new CustomTime(currentHour, currentMinute);
+            return setFromDiff(calendarTime);
+    }
 
-            while(diffMinute < 0){
-                diffMinute += 60;
-                diffHour -= 1;
-            }
+    public CustomTime setFromDiff(CustomTime time){
+        int diffMinute = minutes - time.getMinutes();
+        int diffHour = 0;
 
-            diffHour += hour - currentHour;
+        while(diffMinute < 0){
+            diffMinute += 60;
+            diffHour -= 1;
+        }
 
-            while(diffHour < 0){
-                diffHour += 24;
-            }
+        diffHour += hour - time.getHour();
 
-            return new CustomTime(diffHour, diffMinute);
+        while(diffHour < 0){
+            diffHour += 24;
+        }
+
+        return new CustomTime(diffHour, diffMinute);
+    }
+
+    //MISC
+
+
+    @Override
+    public String toString() {
+        return paddingTime(this.hour)+":"+paddingTime(this.minutes);
+    }
+
+    private String paddingTime(int time){
+        String timeString = "";
+
+        if(time < 10){
+            timeString = "0"+time;
+        } else {
+            timeString = String.valueOf(time);
+        }
+
+        return timeString;
     }
 }
