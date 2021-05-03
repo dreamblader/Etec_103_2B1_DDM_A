@@ -36,4 +36,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ma_sleep_totaltext" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ma_save_btn"
+        style="@style/ButtonDefault"
+        android:drawableStart="@drawable/ic_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/ma_history_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ma_sleep_totaltext" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ma_history_btn"
+        style="@style/ButtonDefault"
+        android:drawableStart="@drawable/ic_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ma_save_btn"
+        app:layout_constraintTop_toTopOf="@+id/ma_save_btn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

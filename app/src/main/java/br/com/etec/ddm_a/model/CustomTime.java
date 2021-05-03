@@ -1,9 +1,12 @@
 package br.com.etec.ddm_a.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Calendar;
 
-public class CustomTime {
+public class CustomTime implements Parcelable {
 
     private int hour;
     private int minutes;
@@ -22,6 +25,24 @@ public class CustomTime {
     public CustomTime(){
         this(0,0,0);
     }
+
+    protected CustomTime(Parcel in) {
+        hour = in.readInt();
+        minutes = in.readInt();
+        seconds = in.readInt();
+    }
+
+    public static final Creator<CustomTime> CREATOR = new Creator<CustomTime>() {
+        @Override
+        public CustomTime createFromParcel(Parcel in) {
+            return new CustomTime(in);
+        }
+
+        @Override
+        public CustomTime[] newArray(int size) {
+            return new CustomTime[size];
+        }
+    };
 
     // HOUR
     public int getHour() {
@@ -97,5 +118,17 @@ public class CustomTime {
         }
 
         return timeString;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.hour);
+        dest.writeInt(this.minutes);
+        dest.writeInt(this.seconds);
     }
 }

@@ -4,6 +4,8 @@
     <string name="home_second_title">Falta para você acordar:</string>
     <string name="time_history">Histórico do Sono</string>
     <string name="sleep_hours">Horas de sono:</string>
+    <string name="save">Salvar</string>
+    <string name="history">Ver Histórico</string>
     <string name="edit">Editar</string>
     <string name="default_time_value">00:00</string>
 </resources>
