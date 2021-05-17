@@ -4,9 +4,10 @@ package br.com.etec.ddm_a.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class CustomTime implements Parcelable {
+public class CustomTime implements Parcelable, Serializable {
 
     private int hour;
     private int minutes;
