@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -48,14 +49,15 @@ public class TimeHistoryActivity extends AppCompatActivity {
 
         try(FileInputStream fis = new FileInputStream(file)) {
             try (ObjectInputStream ois = new ObjectInputStream(fis)) {
-                while(temp = (CustomTime) ois.readObject()){
-                    //TODO
-                    //result.add(temp)
+                while((temp = (CustomTime) ois.readObject()) != null){
+                    result.add(temp);
                 }
             }
         } catch(Exception error){
-        error.printStackTrace();
-        Toast.makeText(this, "Arquivo Cancelado\nCausa: "+error.getMessage(),Toast.LENGTH_LONG).show();
+            if(!(error instanceof EOFException)){
+                error.printStackTrace();
+                Toast.makeText(this, "Arquivo Cancelado\nCausa: "+error.getMessage(),Toast.LENGTH_LONG).show();
+            }
         }
 
         return result;

@@ -90,12 +90,15 @@ public class MainActivity extends AppCompatActivity implements SleepHourFragment
         File file = new File(this.getFilesDir(),FILE_NAME);
 
         try{
-            boolean isFirst = file.createNewFile();
+            boolean exist = !file.createNewFile();
             //System.out.println("New File - "+isFirst+"\nPath: "+file.getAbsolutePath());
-            try(FileOutputStream fos = new FileOutputStream(file)) {
+            try(FileOutputStream fos = new FileOutputStream(file, true)) {
                 try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                    if(exist && file.length() > 0){
+                        long pos = fos.getChannel().position()-4;
+                        fos.getChannel().truncate(pos);
+                    }
                     oos.writeObject(saveTime);
-                    oos.flush();
                 }
             }
             Toast.makeText(this, "Arquivo Salvo com Sucesso",Toast.LENGTH_LONG).show();
