@@ -39,7 +39,7 @@ public class TimeHistoryAdapter extends RecyclerView.Adapter<TimeHistoryAdapter.
         return itemList.size();
     }
 
-    public class TimeHistoryViewHolder extends RecyclerView.ViewHolder{
+    public static class TimeHistoryViewHolder extends RecyclerView.ViewHolder{
 
         public TimeHistoryViewHolder(@NonNull View itemView) {
             super(itemView);

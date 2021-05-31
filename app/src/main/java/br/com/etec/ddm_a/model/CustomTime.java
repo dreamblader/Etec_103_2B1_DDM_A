@@ -110,7 +110,7 @@ public class CustomTime implements Parcelable, Serializable {
     }
 
     private String paddingTime(int time){
-        String timeString = "";
+        String timeString;
 
         if(time < 10){
             timeString = "0"+time;

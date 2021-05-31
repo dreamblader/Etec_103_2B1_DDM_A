@@ -1,24 +1,18 @@
 
 package br.com.etec.ddm_a.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.widget.Toast;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.com.etec.ddm_a.R;
 import br.com.etec.ddm_a.fragment.SleepHourFragment;
@@ -32,19 +26,23 @@ public class MainActivity extends AppCompatActivity implements SleepHourFragment
     CustomTime initTime = null;
     CustomTime finalTime = null;
 
-    ArrayList<CustomTime> savedHistory = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         setupListeners();
-        Fragment sleepHour = SleepHourFragment.newInstance(true);
-        Fragment awakeHour = SleepHourFragment.newInstance(false);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.ma_sleep_frame, sleepHour);
-        transaction.add(R.id.ma_awake_frame, awakeHour);
-        transaction.commit();
+        setupFragments();
+    }
+
+    private void setupFragments(){
+        if(getSupportFragmentManager().getFragments().size() == 0){
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            Fragment sleepHour = SleepHourFragment.newInstance(true);
+            Fragment awakeHour = SleepHourFragment.newInstance(false);
+            transaction.add(R.id.ma_sleep_frame, sleepHour);
+            transaction.add(R.id.ma_awake_frame, awakeHour);
+            transaction.commit();
+        }
     }
 
     private void setupListeners(){
@@ -55,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements SleepHourFragment
             if(initTime != null && finalTime != null){
                 CustomTime saveTime = finalTime.setFromDiff(initTime);
                 saveFile(saveTime);
-                //savedHistory.add(saveTime);
             } else{
                 Toast.makeText(this, "Selecione a Hora Final e Inicial Primeiro", Toast.LENGTH_LONG).show();
             }
@@ -63,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements SleepHourFragment
 
         history.setOnClickListener( view -> {
             Intent intent = new Intent(this, TimeHistoryActivity.class);
-            //intent.putParcelableArrayListExtra("LIST", savedHistory);
             startActivity(intent);
         });
     }
@@ -91,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements SleepHourFragment
 
         try{
             boolean exist = !file.createNewFile();
-            //System.out.println("New File - "+isFirst+"\nPath: "+file.getAbsolutePath());
             try(FileOutputStream fos = new FileOutputStream(file, true)) {
                 try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                     if(exist && file.length() > 0){
@@ -110,27 +105,3 @@ public class MainActivity extends AppCompatActivity implements SleepHourFragment
 
 }
 
-/**
- 4 Tipos
-
- 2 Tipos - Salvamento de Arquivo
-    1- Arquivo Interno
-    2- Arquivo Externo ----> Permissao
-
- 2 Tipos - Arquivo em conjunto
-    1- Shared Preferences --> XML
-    2- Banco de Dados no Android ---> Room
-
- .pdf
- .seu_arquivo
-
- /storage0
- | **** <------ ARQUIVO EXTERNO ------> PERMISAO
- |-> \Android
- || -> \data
- ||| -> meu_app
- |||| -> FILES <--------------ARQUIVO INTERNO
- |-> /DCIM
- |-> /Downloads
-
-**/

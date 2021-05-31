@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,7 +75,7 @@ public class SleepHourFragment extends Fragment {
 
     private void setupListeners()
     {
-        AppCompatButton editButton = getView().findViewById(R.id.am_edit_btn);
+        AppCompatButton editButton = requireView().findViewById(R.id.am_edit_btn);
         editButton.setOnClickListener(view -> {
             TimePickerDialog timeDialog = new TimePickerDialog(getContext(),timeListener,sleepTime.getHour(),sleepTime.getMinutes(),true);
             timeDialog.show();
